@@ -1,12 +1,44 @@
 ---
 layout: page
-title: project 1
-description: with background image
+title: Portfolio management (VBA)
+description: survivor bias, calculation of performance indicators and study of HF alpha using CAPM
 img: assets/img/12.jpg
 importance: 1
-category: work
+category: Academical
 related_publications: true
 ---
+
+Introduction :
+
+A partir des données fournies sur les différents Hedge Funds (HF) et sur leurs performances,
+nous avons pu créer des feuilles Excel comprenant un certain nombre d’indicateurs que nous
+détaillerons par la suite. De plus, et dans un premier temps, nous avons effectué un travail de
+description et de recherche sur les HF, leur histoire, stratégies, composantes et leurs incitations.
+Enfin, dans un fichier annexe, nous vous fournirons le fichier de nos réunions quant à l’avancée
+du projet et de nos résultats Excel.
+
+Plan du projet :
+
+I - L’industrie des hedge funds et les stratégies
+
+II - L’organisation des HF, leurs mécanismes d’incitation et de rémunération, leur démographie
+
+III – Performance et risque des fonds
+- A - Partie sur le biais du survivant :
+  - 1 – Calcul des indicateurs de performances
+  - 2 – Calcul de statistiques des indicateurs de performance
+  - 3 – Commentaires
+- B - Partie sur la décorrélation et du alpha des HF :
+  - 1 – Étude à l’aide du CAPM
+  - 2 – Facteurs de la surperformance des HF
+
+IV - Conclusion générale
+
+V - Peer monitoring - gestion du projet
+
+ANNEXE :
+- Graphique de l’analyse sur l’organisation des HF
+- Code correspondant
 
 Every project has a beautiful feature showcase page.
 It's easy to include images in a flexible 3-column grid format.
