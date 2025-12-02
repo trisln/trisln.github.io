@@ -6,9 +6,9 @@ subtitle: Finance Student #<a href='#'>Affiliations</a>. Address. Contacts. Mott
 
 profile:
   align: right
-  image: 
+  image:
   image_circular: false # crops the image to make it circular
-  more_info: #>
+  more_info:#>
     #<p>555 your office number</p>
     #<p>123 your address street</p>
     #<p>Your City, State 12345</p>
@@ -27,7 +27,7 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I'm Tristan Le Nest, a student in first year of M1 Finance in Université Paris-Dauphine - PSL. And it is my site where you can find all the different coding projects that I made. 
+I'm Tristan Le Nest, a student in first year of M1 Finance in Université Paris-Dauphine - PSL. And it is my site where you can find all the different coding projects that I made.
 
 <!--Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 

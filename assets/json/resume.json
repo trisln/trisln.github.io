@@ -29,7 +29,11 @@
       "url": "",
       "startDate": "2023-05",
       "endDate": "2023-07",
-      "highlights": ["Participation in responses to calls and due diligences for tender from institutional clients (JP Morgan, CA, AXA IM) deal size between 80-150M€", "Successful oral presentation on the importance of automating due diligence responses to the entire company (200 people)", "Updating due diligences questionaries for BFT IM and checking procedures of the company with department managers"]
+      "highlights": [
+        "Participation in responses to calls and due diligences for tender from institutional clients (JP Morgan, CA, AXA IM) deal size between 80-150M€",
+        "Successful oral presentation on the importance of automating due diligence responses to the entire company (200 people)",
+        "Updating due diligences questionaries for BFT IM and checking procedures of the company with department managers"
+      ]
     },
     {
       "name": "Citi, Bank of America, Standard Chartered",
@@ -37,7 +41,10 @@
       "url": "",
       "startDate": "",
       "endDate": "",
-      "highlights":["Completed case studies simulating sales & trading scenarios, delivering client-centric investment ideas and trade recommendations based on market analysis and macroeconomic events.","Proposed workflow and execution improvements through process analysis and automation, and developed data-driven client strategies focused on diversification, sustainability, and moderate growth."]
+      "highlights": [
+        "Completed case studies simulating sales & trading scenarios, delivering client-centric investment ideas and trade recommendations based on market analysis and macroeconomic events.",
+        "Proposed workflow and execution improvements through process analysis and automation, and developed data-driven client strategies focused on diversification, sustainability, and moderate growth."
+      ]
     },
     {
       "name": "French Land Army",
@@ -45,7 +52,7 @@
       "url": "",
       "startDate": "2025",
       "endDate": "",
-      "highlights":"" 
+      "highlights": ""
     }
   ],
   "education": [
@@ -58,7 +65,11 @@
       "startDate": "2022",
       "endDate": "2025",
       "score": "10",
-      "courses": ["Microeconomics, Macroeconomics, Econometrics", "Statistics, Applied mathematics, Linear Algebra", "Technical analysis, Insurance, Accounting, Portfolio management, Computer sciences (VBA/Python)"]
+      "courses": [
+        "Microeconomics, Macroeconomics, Econometrics",
+        "Statistics, Applied mathematics, Linear Algebra",
+        "Technical analysis, Insurance, Accounting, Portfolio management, Computer sciences (VBA/Python)"
+      ]
     },
     {
       "institution": "University Paris Dauphine - PSL",
@@ -69,7 +80,10 @@
       "startDate": "2025",
       "endDate": "2028",
       "score": "10",
-      "courses": ["Fixed income, Forex, Derivatives, Financial Instruments, Risk Premia, Econometrics, Quantitative Finance", "Python/VBA, Data Science, Machine Learning, Blockchain"]
+      "courses": [
+        "Fixed income, Forex, Derivatives, Financial Instruments, Risk Premia, Econometrics, Quantitative Finance",
+        "Python/VBA, Data Science, Machine Learning, Blockchain"
+      ]
     }
   ],
   "volunteer": [
@@ -81,7 +95,10 @@
       "startDate": "2022",
       "endDate": "2025",
       "summary": "",
-      "highlights": ["Developed and maintained partnerships with the sponsoring department to finance the crew (€20k annual budget) through effective communication campaign (2k followers on each platform)", "Participated in sailing events (Spi Dauphine regatta – 2nd (2025) / 4th (2024), VEH - 2nd (2024), Sailor Film festival)."]
+      "highlights": [
+        "Developed and maintained partnerships with the sponsoring department to finance the crew (€20k annual budget) through effective communication campaign (2k followers on each platform)",
+        "Participated in sailing events (Spi Dauphine regatta – 2nd (2025) / 4th (2024), VEH - 2nd (2024), Sailor Film festival)."
+      ]
     }
   ],
   "certificates": [
@@ -128,7 +145,7 @@
       "icon": "fa-solid fa-clipboard-check"
     }
   ],
-  
+
   "languages": [
     {
       "language": "French",
@@ -148,11 +165,7 @@
   ],
   "interests": [
     {
-      "keywords": [
-        "Aviation",
-        "Sport (Formula 1, rugby)",
-        "Impressionism"
-      ]
+      "keywords": ["Aviation", "Sport (Formula 1, rugby)", "Impressionism"]
     }
   ]
 }

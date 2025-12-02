@@ -24,6 +24,7 @@ I - L’industrie des hedge funds et les stratégies
 II - L’organisation des HF, leurs mécanismes d’incitation et de rémunération, leur démographie
 
 III – Performance et risque des fonds
+
 - A - Partie sur le biais du survivant :
   - 1 – Calcul des indicateurs de performances
   - 2 – Calcul de statistiques des indicateurs de performance
@@ -37,6 +38,7 @@ IV - Conclusion générale
 V - Peer monitoring - gestion du projet
 
 ANNEXE :
+
 - Graphique de l’analyse sur l’organisation des HF
 - Code correspondant
 
