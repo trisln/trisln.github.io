@@ -402,27 +402,7 @@ ninja.data = [{
             },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
           title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
           description: "",
-          section: "News",},{id: "projects-portfolio-management-vba",
-          title: 'Portfolio management (VBA)',
-          description: "survivor bias, calculation of performance indicators and study of HF alpha using CAPM",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/1_project/";
-            },},{id: "projects-project-2",
-          title: 'project 2',
-          description: "a project with a background image and giscus comments",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/2_project/";
-            },},{id: "projects-project-3-with-very-long-name",
-          title: 'project 3 with very long name',
-          description: "a project that redirects to another website",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/3_project/";
-            },},{id: "projects-project-4",
-          title: 'project 4',
-          description: "another without an image",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/4_project/";
-            },},{id: "projects-project-5",
+          section: "News",},{id: "projects-project-5",
           title: 'project 5',
           description: "a project with a background image",
           section: "Projects",handler: () => {
@@ -447,6 +427,31 @@ ninja.data = [{
           description: "another project with an image 🎉",
           section: "Projects",handler: () => {
               window.location.href = "/projects/9_project/";
+            },},{id: "projects-option-pricing-library",
+          title: 'Option pricing library',
+          description: "Python",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/python_BSM/";
+            },},{id: "projects-fx-strategies",
+          title: 'FX Strategies',
+          description: "Python study on FX Momentum and PPP strategy",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/python_fx_strat/";
+            },},{id: "projects-portfolio-optimization-and-analysis",
+          title: 'Portfolio optimization and analysis',
+          description: "Python",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/python_port_opti_ana/";
+            },},{id: "projects-portfolio-management-vba",
+          title: 'Portfolio management (VBA)',
+          description: "survivor bias, calculation of performance indicators and study of HF alpha using CAPM",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/vba_capm_RL/";
+            },},{id: "projects-yield-curve-vba",
+          title: 'Yield curve - VBA',
+          description: "Linear interpolation and Nelson-Siegel",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/vba_yield_curve/";
             },},{
         id: 'social-email',
         title: 'email',
