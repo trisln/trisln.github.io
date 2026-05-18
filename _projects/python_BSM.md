@@ -83,7 +83,20 @@ Technologies Used
 - Python : NumPy, SciPy, Pandas, Streamlit, Matplotlib / Plotly, PyTest
 
 ---
-📥 [Download the Python Notebook](assets/code/python_BSM_and_others.ipynb)
+📥 [Download the Python Notebook](/Users/tristanlenest/trisln.github.io/assets/code/bsm_pricing_dashboard_2)
+
+### Run the Pricing Dashboard
+
+Download the project folder and open it in Terminal.
+
+```bash
+cd where your file is
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python3 app.py
+```
+Then launch : http://127.0.0.1:5000 in Safari
 
 ---
 ## Currently working on
@@ -91,6 +104,7 @@ Technologies Used
 The following extensions are currently under development to further enhance the realism and market relevance of the library:
 
 **Implied Volatility Surface Analysis**
+- (Included) IV Smile
 - Construction and visualization of implied volatility surfaces across strikes and maturities, including volatility skew and term structure analysis. This module will enable 2D and 3D representations of implied volatility dynamics.
 
 **Market Data Ingestion Pipeline**

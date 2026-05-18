@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Option & Structured Product Pricing Lab</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="eyebrow">Quantitative pricing dashboard</p>
+        <h1>Options et produits structurés</h1>
+        <p class="subtitle">
+          Interface locale de pricing en Python avec récupération de sous-jacents via Yahoo Finance,
+          moteurs Black-Scholes, arbre binomial, Monte Carlo, Longstaff-Schwartz, exotiques et produits structurés.
+        </p>
+      </div>
+      <div class="hero-card">
+        <span class="pill">Backend Python</span>
+        <span class="pill">Yahoo Finance</span>
+        <span class="pill">Batch pricing</span>
+        <span class="pill">Structured products</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel market-panel">
+      <div class="panel-header">
+        <h2>1. Sous-jacent</h2>
+        <p>Recherchez un ticker ou un nom d’entreprise. La sélection alimente ensuite les formulaires.</p>
+      </div>
+
+      <div class="search-row">
+        <input id="search-query" type="text" placeholder="AAPL, Nvidia, LVMH, SPY..." autocomplete="off">
+        <button id="search-btn">Rechercher</button>
+      </div>
+
+      <div id="search-results" class="search-results"></div>
+
+      <div id="market-card" class="market-card hidden">
+        <div class="market-title">
+          <div>
+            <h3 id="market-name">—</h3>
+            <p id="market-symbol">—</p>
+          </div>
+          <button id="refresh-market-btn" class="secondary">Actualiser</button>
+        </div>
+        <div class="metric-grid">
+          <div class="metric"><span>Spot</span><strong id="market-spot">—</strong></div>
+          <div class="metric"><span>Vol. réalisée 1 an</span><strong id="market-vol">—</strong></div>
+          <div class="metric"><span>Dividend yield</span><strong id="market-div">—</strong></div>
+          <div class="metric"><span>Devise</span><strong id="market-currency">—</strong></div>
+        </div>
+        <div class="option-chain-row">
+          <label for="expiry-select">Échéance Yahoo Finance</label>
+          <select id="expiry-select"></select>
+          <button id="load-chain-btn" class="secondary">Charger la chaîne</button>
+        </div>
+        <div id="chain-preview" class="chain-preview"></div>
+      </div>
+    </section>
+
+    <section class="panel tabs-panel">
+      <div class="tabs">
+        <button class="tab active" data-tab="vanilla">Vanilles</button>
+        <button class="tab" data-tab="implied-volatility">Volatilité implicite</button>
+        <button class="tab" data-tab="exotic">Exotiques</button>
+        <button class="tab" data-tab="batch">Multiples options</button>
+        <button class="tab" data-tab="structured">Produits structurés</button>
+      </div>
+
+      <section id="tab-vanilla" class="tab-content active">
+        <div class="panel-header compact">
+          <h2>2. Option vanille</h2>
+          <p>Pricing unitaire, Greeks et volatilité implicite à partir d’un prix de marché.</p>
+        </div>
+        <form id="vanilla-form" class="form-grid">
+          <label>Modèle
+            <select name="model">
+              <option value="bsm">Black-Scholes</option>
+              <option value="binomial">Arbre binomial CRR</option>
+              <option value="monte_carlo">Monte Carlo européen</option>
+              <option value="longstaff_schwartz">Longstaff-Schwartz américain</option>
+            </select>
+          </label>
+          <label>Type
+            <select name="option_type">
+              <option value="call">Call</option>
+              <option value="put">Put</option>
+            </select>
+          </label>
+          <label>Spot <input name="spot" type="number" step="any" required></label>
+          <label>Strike <input name="strike" type="number" step="any" required></label>
+          <label>Maturité en années <input name="maturity" type="number" step="any" value="1" required></label>
+          <label>Taux sans risque <input name="rate" type="number" step="any" value="0.02" required></label>
+          <label>Volatilité <input name="volatility" type="number" step="any" value="0.25" required></label>
+          <label>Dividend yield <input name="dividend_yield" type="number" step="any" value="0.00" required></label>
+          <label>Prix de marché, pour IV <input name="market_price" type="number" step="any"></label>
+          <label class="model-extra">Pas / steps <input name="steps" type="number" step="1" value="400"></label>
+          <label class="model-extra">Chemins MC <input name="n_paths" type="number" step="1000" value="100000"></label>
+          <label class="model-extra">Degré LSM <input name="degree" type="number" step="1" value="2"></label>
+          <label class="checkbox-line">
+            <input name="american" type="checkbox">
+            Option américaine pour l’arbre binomial
+          </label>
+          <div class="actions"><button type="submit">Pricer</button></div>
+        </form>
+        <div id="vanilla-output" class="output"></div>
+      </section>
+
+      <section id="tab-implied-volatility" class="tab-content">
+        <div class="panel-header compact">
+          <h2>3. Volatilité implicite</h2>
+          <p>
+            Lecture de la smile pour une échéance Yahoo Finance donnée. L’interface affiche l’IV publiée,
+            puis recalcule une IV Black-Scholes à partir du midpoint bid/ask lorsque le marché fournit un spread exploitable.
+          </p>
+        </div>
+
+        <form id="iv-form" class="form-grid">
+          <label>Sous-jacent sélectionné
+            <input id="iv-symbol" name="symbol" type="text" placeholder="Sélectionner d’abord un sous-jacent" readonly>
+          </label>
+          <label>Échéance
+            <select id="iv-expiry" name="expiry"></select>
+          </label>
+          <label>Type d’options
+            <select name="side">
+              <option value="call">Calls</option>
+              <option value="put">Puts</option>
+            </select>
+          </label>
+          <label>Taux sans risque
+            <input name="rate" type="number" step="any" value="0.02">
+          </label>
+          <div class="actions"><button type="submit">Afficher la smile</button></div>
+        </form>
+
+        <div id="iv-output" class="output"></div>
+      </section>
+
+      <section id="tab-exotic" class="tab-content">
+        <div class="panel-header compact">
+          <h2>4. Options exotiques</h2>
+          <p>Asiatiques, barrières et gap options.</p>
+        </div>
+        <form id="exotic-form" class="form-grid">
+          <label>Produit
+            <select name="exotic_type" id="exotic-type">
+              <option value="asian">Asian option</option>
+              <option value="barrier">Barrier option</option>
+              <option value="gap">Gap option</option>
+            </select>
+          </label>
+          <label>Type
+            <select name="option_type">
+              <option value="call">Call</option>
+              <option value="put">Put</option>
+            </select>
+          </label>
+          <label>Spot <input name="spot" type="number" step="any" required></label>
+          <label>Strike <input name="strike" type="number" step="any" required></label>
+          <label>Maturité en années <input name="maturity" type="number" step="any" value="1" required></label>
+          <label>Taux sans risque <input name="rate" type="number" step="any" value="0.02" required></label>
+          <label>Volatilité <input name="volatility" type="number" step="any" value="0.25" required></label>
+          <label>Dividend yield <input name="dividend_yield" type="number" step="any" value="0.00" required></label>
+
+          <label class="asian-field">Moyenne
+            <select name="averaging">
+              <option value="arithmetic">Arithmétique</option>
+              <option value="geometric">Géométrique</option>
+            </select>
+          </label>
+
+          <label class="barrier-field hidden">Barrière <input name="barrier" type="number" step="any" value="120"></label>
+          <label class="barrier-field hidden">Type de barrière
+            <select name="barrier_type">
+              <option value="up-and-out">Up-and-out</option>
+              <option value="down-and-out">Down-and-out</option>
+              <option value="up-and-in">Up-and-in</option>
+              <option value="down-and-in">Down-and-in</option>
+            </select>
+          </label>
+
+          <label class="gap-field hidden">Strike déclencheur <input name="trigger_strike" type="number" step="any" value="100"></label>
+          <label class="gap-field hidden">Strike de payoff <input name="payoff_strike" type="number" step="any" value="105"></label>
+
+          <label class="mc-field">Chemins MC <input name="n_paths" type="number" step="1000" value="80000"></label>
+          <label class="mc-field">Steps <input name="steps" type="number" step="1" value="252"></label>
+          <div class="actions"><button type="submit">Pricer l’exotique</button></div>
+        </form>
+        <div id="exotic-output" class="output"></div>
+      </section>
+
+      <section id="tab-batch" class="tab-content">
+        <div class="panel-header compact">
+          <h2>5. Multiples options</h2>
+          <p>Ajoutez des lignes et lancez un pricing par lot.</p>
+        </div>
+        <div class="batch-toolbar">
+          <button id="add-batch-row" class="secondary">Ajouter une ligne</button>
+          <button id="batch-price-btn">Pricer le lot</button>
+        </div>
+        <div class="table-wrap">
+          <table id="batch-table">
+            <thead>
+              <tr>
+                <th>Modèle</th><th>Type</th><th>Spot</th><th>Strike</th><th>T</th><th>r</th><th>σ</th><th>q</th><th>Steps</th><th>MC paths</th><th>Américain</th><th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div id="batch-output" class="output"></div>
+      </section>
+
+      <section id="tab-structured" class="tab-content">
+        <div class="panel-header compact">
+          <h2>6. Produits structurés</h2>
+          <p>Pricers Monte Carlo simplifiés pour notes capital-protégées, reverse convertibles et autocallables.</p>
+        </div>
+        <form id="structured-form" class="form-grid">
+          <label>Produit
+            <select name="product_type" id="structured-type">
+              <option value="capital_protected">Capital protected note</option>
+              <option value="reverse_convertible">Reverse convertible</option>
+              <option value="autocallable">Autocallable note</option>
+            </select>
+          </label>
+          <label>Spot <input name="spot" type="number" step="any" required></label>
+          <label>Maturité en années <input name="maturity" type="number" step="any" value="1" required></label>
+          <label>Taux sans risque <input name="rate" type="number" step="any" value="0.02" required></label>
+          <label>Volatilité <input name="volatility" type="number" step="any" value="0.25" required></label>
+          <label>Dividend yield <input name="dividend_yield" type="number" step="any" value="0.00" required></label>
+          <label>Notional <input name="notional" type="number" step="any" value="1000" required></label>
+          <label>Chemins MC <input name="n_paths" type="number" step="1000" value="80000" required></label>
+
+          <label class="capital-field">Floor de capital <input name="capital_floor" type="number" step="any" value="0.90"></label>
+          <label class="capital-field">Participation <input name="participation" type="number" step="any" value="1.00"></label>
+
+          <label class="reverse-field hidden">Coupon <input name="coupon_rate" type="number" step="any" value="0.10"></label>
+          <label class="reverse-field hidden">Barrière de protection <input name="protection_barrier" type="number" step="any" value="0.70"></label>
+
+          <label class="autocall-field hidden">Coupon annuel <input name="annual_coupon_rate" type="number" step="any" value="0.10"></label>
+          <label class="autocall-field hidden">Barrière d’autocall <input name="autocall_barrier" type="number" step="any" value="1.00"></label>
+          <label class="autocall-field hidden">Barrière de coupon <input name="coupon_barrier" type="number" step="any" value="0.70"></label>
+          <label class="autocall-field hidden">Barrière de protection <input name="protection_barrier" type="number" step="any" value="0.60"></label>
+          <label class="autocall-field hidden">Observations / an <input name="observations_per_year" type="number" step="1" value="4"></label>
+          <label class="autocall-field hidden checkbox-line">
+            <input name="memory_coupon" type="checkbox" checked>
+            Coupon à mémoire
+          </label>
+
+          <div class="actions"><button type="submit">Pricer le produit</button></div>
+        </form>
+        <div id="structured-output" class="output"></div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>
+      Outil pédagogique de pricing. Les données Yahoo Finance sont utilisées pour l’identification du sous-jacent,
+      le spot indicatif, la volatilité réalisée et la consultation des chaînes d’options lorsqu’elles sont disponibles.
+    </p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
